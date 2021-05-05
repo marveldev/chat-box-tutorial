@@ -1,23 +1,59 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react'
+import ChatBox from 'react-custom-chat'
 
-function App() {
+const App = () => {
+  const [firstPersonMessageList, setFirstPersonMessageList] = useState([])
+  const [secondPersonMessageList, setSecondPersonMessageList] = useState([])
+
+  const sendFirstPersonMessage = (newMessage) => {
+    const newFirstPersonMessageList = [
+      ...firstPersonMessageList, {text: newMessage, person: 'primary'}
+    ]
+
+    const newSecondPersonMessageList = [
+      ...secondPersonMessageList, {text: newMessage, person: 'secondary'}
+    ]
+
+    setFirstPersonMessageList(newFirstPersonMessageList)
+    setSecondPersonMessageList(newSecondPersonMessageList)
+  }
+
+  const sendSecondPersonMessage = (newMessage) => {
+    const newFirstPersonMessageList = [
+      ...firstPersonMessageList, {text: newMessage, person: 'secondary'}
+    ]
+
+    const newSecondPersonMessageList = [
+      ...secondPersonMessageList, {text: newMessage, person: 'primary'}
+    ]
+
+    setFirstPersonMessageList(newFirstPersonMessageList)
+    setSecondPersonMessageList(newSecondPersonMessageList)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-layer">
+      <ChatBox
+        settings={{
+          position: 'left',
+          navColor: 'blue',
+          primaryColor: 'green',
+          secondaryColor: 'red',
+          navText: 'John Dey'
+        }}
+        messageList={firstPersonMessageList}
+        onSendMessage={sendFirstPersonMessage}
+      />
+      <ChatBox
+        settings={{
+          navColor: 'yellow',
+          primaryColor: 'red',
+          secondaryColor: 'green',
+          navText: 'Jane Stowaway'
+        }}
+        messageList={secondPersonMessageList}
+        onSendMessage={sendSecondPersonMessage}
+      />
     </div>
   );
 }

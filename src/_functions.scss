@@ -1,0 +1,8 @@
+@mixin position($direction) {
+  position: absolute;
+  height: 5em;
+  text-align: $direction;
+}
+
+// variables can be passed to different functions, with one differences.
+// more than one diff. can be passed.

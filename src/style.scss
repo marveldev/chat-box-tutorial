@@ -1,0 +1,28 @@
+@import './variables';
+@import './functions';
+
+.app-layer {
+  h1 {
+    background-color: $primaryColor;
+    @include position(center);
+
+    &:hover {
+      color: #ff0000;
+    }
+  }
+
+  %message-shared {
+    border: 1px solid #ccc;
+    padding: 10px;
+    color: #333;
+  }
+
+  h2 {
+    @extend h1; //this will copy all the styling in h1
+    @extend %message-shared;
+    background-color: #ff0000;
+    // you can set your own styling which will override the extend styling, even if the same.
+    // the extend can also be a variable.
+  }
+}
+
